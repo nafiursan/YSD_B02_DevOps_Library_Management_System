@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: spring
-        image: nafiur30080/lms:30
+        image: nafiur30080/lms:latest
         ports:
         - containerPort: 8080
 
