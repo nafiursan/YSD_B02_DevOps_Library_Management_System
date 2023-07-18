@@ -31,10 +31,16 @@ spec:
         image: mysql:latest
         env:
         - name: MYSQL_DATABASE
-          value: "sparklmsdb"  # Corrected: Enclosed in quotes as a string
+          value: "sparklmsdb"
         - name: MYSQL_ROOT_PASSWORD
-          value: "123456"  # Corrected: Enclosed in quotes as a string
+          value: "123456"
         ports:
         - containerPort: 3306
           name: mysql
-
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pvc
