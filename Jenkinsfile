@@ -14,8 +14,8 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                // Checking whether the repository exists or not
-                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/nafiursan/YSD_B02_DevOps_Library_Management_System.git']])
+                // Checkout the source code from Git repository
+                git branch: 'master', url: 'https://github.com/nafiursan/YSD_B02_DevOps_Library_Management_System.git'
             }
         }
 
