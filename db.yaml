@@ -1,4 +1,13 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-configmap
+data:
+  database: sparklmsdb
+
+---
+
+apiVersion: v1
 kind: Service
 metadata:
   name: mysql-service
@@ -33,7 +42,10 @@ spec:
           image: mysql:latest
           env:
             - name: MYSQL_DATABASE
-              value: "sparklmsdb"
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-configmap
+                  key: database
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
