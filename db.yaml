@@ -33,10 +33,7 @@ spec:
           image: mysql:latest
           env:
             - name: MYSQL_DATABASE
-              valueFrom:
-                configMapKeyRef:
-                  name: mysql-configmap
-                  key: database
+              value: "sparklmsdb"
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
