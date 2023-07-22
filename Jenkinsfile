@@ -3,19 +3,19 @@ pipeline {
   
 
     tools {
-        // Install the Maven version configured as "Maven_3.9.3" and add it to the path.
+        // Install the Maven version configured as "M3" and add it to the path.
         maven "Maven_3.9.3"
     }
 
     stages {
-        stage('Git Checkout') {
+        stage('Git Checkout🍴') {
             steps {
-                // Checkout the source code from Git repository
-                git branch: 'master', url: 'https://github.com/nafiursan/YSD_B02_DevOps_Library_Management_System.git'
+                // Checking whether the repository exists or not
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/nafiursan/YSD_B02_DevOps_Library_Management_System.git']])
             }
         }
 
-        stage('Add Environment Variables') {
+        stage('Add Environment Variables🏷️') {
             steps {
                 // Inject database credentials as environment variables
                 withCredentials([usernamePassword(credentialsId: 'DB_CREDENTIALS', passwordVariable: 'DB_PASSWORD', usernameVariable: 'DB_USERNAME')]) {
@@ -28,13 +28,13 @@ pipeline {
             }
         }
 
-        stage('Build with Maven') {
+        stage('Build with Maven 🔨') {
             steps {
                 sh 'mvn clean install'
             }
         }
 
-        stage('Create Docker Image') {
+        stage('Create Docker Image 📦') {
             steps {
                 script {
                     // Create Docker image
@@ -43,7 +43,7 @@ pipeline {
             }
         }
 
-        stage('Push to Dockerhub') {
+        stage('Push to Dockerhub🛅️') {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'dockerhub') {
@@ -55,7 +55,7 @@ pipeline {
             }
         }
 
-        stage('Delete Docker Image') {
+        stage('Delete Docker Image💥') {
             steps {
                 script {
                     def imageToDelete = "nafiur30080/lms:${env.BUILD_ID}"
@@ -67,7 +67,7 @@ pipeline {
             }
         }
 
-        stage('Delete Previous k8s Pods') {
+         stage('Delete Previous k8s Pods💥') {
             steps {
                 withKubeConfig(credentialsId: 'kube') {
                     // Delete previous Kubernetes pods
@@ -78,7 +78,7 @@ pipeline {
             }
         }
 
-        stage('Deploy Updated k8s Pods') {
+       stage('Deploy Updated k8s Pods✅') {
             steps {
                 withKubeConfig(credentialsId: 'kube') {
                     // Deploy updated Kubernetes pods
