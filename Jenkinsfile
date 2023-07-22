@@ -7,10 +7,6 @@ pipeline {
         maven "Maven_3.9.3"
     }
 
-        triggers{
-            pollSCM('H/2 * * * *')
-        }
-
     stages {
         stage('Git Checkout') {
             steps {
