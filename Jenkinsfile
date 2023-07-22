@@ -3,7 +3,7 @@ pipeline {
   
 
     tools {
-        // Install the Maven version configured as "M3" and add it to the path.
+        // Install the Maven version configured as "Maven_3.9.3" and add it to the path.
         maven "Maven_3.9.3"
     }
 
